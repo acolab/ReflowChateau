@@ -11,7 +11,7 @@ Graph::Graph(void) {
 
 
 void Graph::set(float startTemp, float preheat, float soakTemp, float soakTime, float rampUp, 
-                float peakTemp, float peakTime, ILI9341_t3* ptr_tft, Adafruit_FT6206* ptr_ctp) {
+                float peakTemp, float peakTime, ILI9341_t3* ptr_tft, Adafruit_STMPE610* ptr_ctp) {
   
   this->ptr_tft = ptr_tft;
   this->ptr_ctp = ptr_ctp;

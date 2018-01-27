@@ -6,7 +6,8 @@
 #define PID_h
 
 #include "Arduino.h"
-#include "Max6675.h"
+//#include "Max6675.h"
+#include "Adafruit_MAX31855.h"
 
 
 class PID {
@@ -25,7 +26,7 @@ class PID {
     void setTunings(float, float, float); 
     void setSampleTime(int);
 
-    MAX6675 thermocouple;
+    Adafruit_MAX31855 thermocouple;
   
     float kp;  // proportional
     float ki;  // integral

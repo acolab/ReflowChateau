@@ -5,7 +5,7 @@
 #define SETTING_h
 
 #include "ILI9341_t3.h"
-#include "Adafruit_FT6206.h"
+#include "Adafruit_STMPE610.h"
 #include "Configuration.h"
 #include "Button.h"
 
@@ -13,7 +13,7 @@
 class Setting {  
   public:
     Setting(String, String, float, float, float, float, 
-            int, ILI9341_t3*, Adafruit_FT6206*);
+            int, ILI9341_t3*, Adafruit_STMPE610*);
     void updateMe(void);
     void drawMe(void);
     float getValue(void);
@@ -36,7 +36,7 @@ class Setting {
     uint16_t boxColor;
     
     ILI9341_t3* ptr_tft;
-    Adafruit_FT6206* ptr_ctp;
+    Adafruit_STMPE610* ptr_ctp;
     
     boolean drawn;
     void drawValue(uint16_t);

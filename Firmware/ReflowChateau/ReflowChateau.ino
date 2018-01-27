@@ -9,6 +9,7 @@
 #include "SPI.h"
 #include "PID.h"
 #include "Max6675.h"
+#include "Adafruit_MAX31855.h"
 #include "ILI9341_t3.h"
 #include "Configuration.h"
 #include "SplashScreen.h"
@@ -17,18 +18,20 @@
 #include "Graph.h"
 #include "Setting.h"
 #include "Wire.h"
-#include "Adafruit_FT6206.h"
+//#include "Adafruit_FT6206.h"
+#include "Adafruit_STMPE610.h"
 
-Adafruit_FT6206 ctp = Adafruit_FT6206();
+//Adafruit_FT6206 ctp = Adafruit_FT6206();
+Adafruit_STMPE610 ctp = Adafruit_STMPE610(8);
 ILI9341_t3 tft = ILI9341_t3(TFT_CS, TFT_DC);
 SplashScreen splash = SplashScreen(FJ_X, FJ_Y, &tft, &ctp);
 Screensaver screensaver = Screensaver(&tft, &ctp);
 PID pid(TEMP_PID_Kp, TEMP_PID_Ki, TEMP_PID_Kd, DIRECT);
 
-Setting preheatSetting = Setting("Preheat", "C/s", 1.4, 1.3, 1.5, 0.01, 0, &tft, &ctp);
+Setting preheatSetting = Setting("Preheat", "C/s", 1.2, 1.1, 1.5, 0.01, 0, &tft, &ctp);
 Setting soakTempSetting = Setting("Soak temp", "C", 150, 140, 180, 1, 45, &tft, &ctp);
 Setting soakTimeSetting = Setting("Soak time", "s", 60, 40, 70, 1, 90, &tft, &ctp);
-Setting rampUpSetting = Setting("Ramp up", "C/s", 0.6, 0.5, 0.7, 0.01, 135, &tft, &ctp);
+Setting rampUpSetting = Setting("Ramp up", "C/s", 0.4, 0.3, 0.7, 0.01, 135, &tft, &ctp);
 Setting peakTempSetting = Setting("Peak temp", "C", 225, 210, 240, 1, 180, &tft, &ctp);
 Setting peakTimeSetting = Setting("Peak time", "s", 25, 20, 30, 1, 225, &tft, &ctp);
 
@@ -45,6 +48,8 @@ long lastPrintTime = 0;
 void setup(void) {
   Serial.begin(115200);
   delay(500);
+
+  
   tft.begin();
   if (!ctp.begin(20)) {  // pass in 'sensitivity' coefficient
     while (1);
@@ -57,6 +62,8 @@ void setup(void) {
   reflowButton.drawMe();
   isReflowing = false;
   lastPressedTime = millis();
+
+
 }
 
 
@@ -77,6 +84,17 @@ void loop(void) {
     settings();
   }
 }
+
+/*void loop(void) {
+  Serial.println("Temperature:");
+  //MAX6675 thermocouple(THERMOCOUPLE_SCLK, THERMOCOUPLE_CS, THERMOCOUPLE_MISO);
+  //Serial.println(thermocouple.getTemperature());
+  //delay(1000);
+
+  
+  Serial.println(thermocouple.readCelsius());
+  delay(1000);
+}*/
 
 
 void reflow(void){

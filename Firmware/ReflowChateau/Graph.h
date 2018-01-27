@@ -5,7 +5,7 @@
 #define GRAPH_h
 
 #include "ILI9341_t3.h"
-#include "Adafruit_FT6206.h"
+#include "Adafruit_STMPE610.h"
 #include "Configuration.h"
 
 
@@ -13,7 +13,7 @@ class Graph {
   public:
     Graph(void);
     void set(float, float, float, float, float, float, 
-             float, ILI9341_t3*, Adafruit_FT6206*);
+             float, ILI9341_t3*, Adafruit_STMPE610*);
     void drawLines(void);
     float getSetpoint(float);
     float plotLine(float, float);
@@ -22,7 +22,7 @@ class Graph {
   private:
     void openDoor(void);
     ILI9341_t3* ptr_tft;
-    Adafruit_FT6206* ptr_ctp;
+    Adafruit_STMPE610* ptr_ctp;
     Point points[6];
     Point pointToDisplay(Point);
     float lastTime, lastTemp;

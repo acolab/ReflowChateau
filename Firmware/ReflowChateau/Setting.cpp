@@ -5,7 +5,7 @@
 #include "Setting.h"
 
 Setting::Setting(String setting, String units, float value, float minimum, float maximum,
-float increment, int yLoc, ILI9341_t3 *ptr_tft, Adafruit_FT6206 *ptr_ctp) {
+float increment, int yLoc, ILI9341_t3 *ptr_tft, Adafruit_STMPE610 *ptr_ctp) {
   this->setting = setting;
   this->units = units;
   this->value = value;

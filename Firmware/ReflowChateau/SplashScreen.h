@@ -5,7 +5,7 @@
 #define SPLASHSCREEN_h
 
 #include "ILI9341_t3.h"
-#include "Adafruit_FT6206.h"
+#include "Adafruit_STMPE610.h"
 #include "Configuration.h"
 
 
@@ -19,14 +19,14 @@ static const uint8_t fj[]  = {8,   167,  1,    37,   35,   51,   38,   185,
 
 class SplashScreen {  
   public:
-    SplashScreen(int, int, ILI9341_t3*, Adafruit_FT6206*);
+    SplashScreen(int, int, ILI9341_t3*, Adafruit_STMPE610*);
     void drawMe(void);
 
   private:
     int xLoc;
     int yLoc;
     ILI9341_t3* ptr_tft;
-    Adafruit_FT6206* ptr_ctp;
+    Adafruit_STMPE610* ptr_ctp;
 };
 
 

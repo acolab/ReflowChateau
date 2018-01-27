@@ -13,7 +13,7 @@ Button::Button(void) {
 
 
 void Button::set(String name, int xLoc, int yLoc, uint8_t width, uint8_t height, 
-               uint8_t textSize, ILI9341_t3* ptr_tft, Adafruit_FT6206* ptr_ctp) {
+               uint8_t textSize, ILI9341_t3* ptr_tft, Adafruit_STMPE610* ptr_ctp) {
   this->name = name;
   this->xLoc = xLoc;
   this->yLoc = yLoc;
@@ -75,8 +75,13 @@ boolean Button::updateMe(void){
   boolean touched = ptr_ctp->touched();
   if (touched){
     TS_Point p = ptr_ctp->getPoint();
-    p.x = map(p.x, 0, 240, 240, 0);
-    p.y = map(p.y, 0, 320, 320, 0);
+    p.x = map(p.x, 0, 3800, 0, 240);
+    p.y = map(p.y, 0, 4000, 0, 320);
+/*
+  Serial.print("X = "); Serial.print(p.x);
+  Serial.print("\tY = "); Serial.print(p.y);
+  Serial.print("\tPressure = "); Serial.println(p.z);  
+*/    
     isOver(p.x, p.y);
   }
   if (prevOver){
@@ -95,9 +100,19 @@ boolean Button::updateMe(void){
 
 
 void Button::isOver(int x, int y){
+  /*
+  Serial.println(x);
+  Serial.println(xLoc);
+  Serial.println(xLoc+width);
+  Serial.println(y);
+  Serial.println(yLoc);
+  Serial.println(yLoc+height);
+  Serial.println(over ? "already over" : "not already over");  
+  */
   if (x >= xLoc && x <= xLoc+width && y >= yLoc && y <= yLoc+height){
     if (!over){
       over = true;
+      Serial.println(name);
       drawMe();
     }
   }

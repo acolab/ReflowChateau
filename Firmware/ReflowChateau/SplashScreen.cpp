@@ -5,7 +5,7 @@
 #include "SplashScreen.h"
 
 SplashScreen::SplashScreen(int xLoc, int yLoc, ILI9341_t3 *ptr_tft, 
-                           Adafruit_FT6206 *ptr_ctp) {
+                           Adafruit_STMPE610 *ptr_ctp) {
   this->xLoc = xLoc;
   this->yLoc = yLoc;
   this->ptr_tft = ptr_tft;

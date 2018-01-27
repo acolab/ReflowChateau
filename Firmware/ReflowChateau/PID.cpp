@@ -11,7 +11,8 @@
 
 
 PID::PID(float kp, float ki, float kd, int controllerDirection)
-:thermocouple(THERMOCOUPLE_SCLK, THERMOCOUPLE_CS, THERMOCOUPLE_MISO){
+  : thermocouple(THERMOCOUPLE_SCLK, THERMOCOUPLE_CS, THERMOCOUPLE_MISO)
+{
   PID::setOutputLimits(0, TEMP_UPDATE_INTERVAL);
   sampleTime = TEMP_UPDATE_INTERVAL;
   PID::setControllerDirection(controllerDirection);
@@ -19,6 +20,7 @@ PID::PID(float kp, float ki, float kd, int controllerDirection)
   windowStartTime = 0;
   pinMode(BOTTOM_ELEMENT, OUTPUT);
   pinMode(TOP_ELEMENT, OUTPUT);
+  thermocouple.begin();
 }
 
 
@@ -38,7 +40,7 @@ void PID::compute(void){
 
 float PID::getTemperature(void){
   if (millis() - windowStartTime >= sampleTime){
-    myInput = thermocouple.getTemperature();  
+    myInput = thermocouple.readCelsius();  
     PID::compute();
     windowStartTime = millis();
   }
@@ -52,7 +54,7 @@ float PID::updateMe(void){
   digitalWrite(TOP_ELEMENT, myOutput >= millis() - windowStartTime);
   // update the temperature and output every sampleTime milliseconds
   if (millis() - windowStartTime >= sampleTime){
-    myInput = thermocouple.getTemperature();  
+    myInput = thermocouple.readCelsius();  
     PID::compute();
     windowStartTime = millis();
   } 

@@ -37,10 +37,11 @@ struct Point {
 #define THERMOCOUPLE_SCLK 2
 #define THERMOCOUPLE_CS 3
 #define THERMOCOUPLE_MISO 4
-#define BOTTOM_ELEMENT 6
-#define TOP_ELEMENT 7
+#define BOTTOM_ELEMENT 5
+#define TOP_ELEMENT 5
 #define TFT_DC 9
 #define TFT_CS 10
+
    
 #endif // CONFIGURATION_h
 
