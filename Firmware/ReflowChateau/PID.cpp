@@ -23,6 +23,13 @@ PID::PID(float kp, float ki, float kd, int controllerDirection)
   thermocouple.begin();
 }
 
+void PID::updateInput()
+{
+  float newValue = thermocouple.readCelsius();
+  if (newValue == NAN)
+    return;
+  myInput = newValue;
+}
 
 /* Update the output to the PID */
 void PID::compute(void){
@@ -40,7 +47,7 @@ void PID::compute(void){
 
 float PID::getTemperature(void){
   if (millis() - windowStartTime >= sampleTime){
-    myInput = thermocouple.readCelsius();  
+    updateInput();
     PID::compute();
     windowStartTime = millis();
   }
@@ -54,7 +61,7 @@ float PID::updateMe(void){
   digitalWrite(TOP_ELEMENT, myOutput >= millis() - windowStartTime);
   // update the temperature and output every sampleTime milliseconds
   if (millis() - windowStartTime >= sampleTime){
-    myInput = thermocouple.readCelsius();  
+    updateInput();
     PID::compute();
     windowStartTime = millis();
   } 

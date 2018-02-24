@@ -25,6 +25,7 @@ class PID {
     void setControllerDirection(int);
     void setTunings(float, float, float); 
     void setSampleTime(int);
+    void updateInput();
 
     Adafruit_MAX31855 thermocouple;
   
