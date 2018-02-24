@@ -77,11 +77,6 @@ boolean Button::updateMe(void){
     TS_Point p = ptr_ctp->getPoint();
     p.x = map(p.x, 0, 3800, 0, 240);
     p.y = map(p.y, 0, 4000, 0, 320);
-/*
-  Serial.print("X = "); Serial.print(p.x);
-  Serial.print("\tY = "); Serial.print(p.y);
-  Serial.print("\tPressure = "); Serial.println(p.z);  
-*/    
     isOver(p.x, p.y);
   }
   if (prevOver){
@@ -100,19 +95,9 @@ boolean Button::updateMe(void){
 
 
 void Button::isOver(int x, int y){
-  /*
-  Serial.println(x);
-  Serial.println(xLoc);
-  Serial.println(xLoc+width);
-  Serial.println(y);
-  Serial.println(yLoc);
-  Serial.println(yLoc+height);
-  Serial.println(over ? "already over" : "not already over");  
-  */
   if (x >= xLoc && x <= xLoc+width && y >= yLoc && y <= yLoc+height){
     if (!over){
       over = true;
-      Serial.println(name);
       drawMe();
     }
   }

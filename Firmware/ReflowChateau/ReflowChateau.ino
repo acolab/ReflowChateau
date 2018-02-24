@@ -18,10 +18,8 @@
 #include "Graph.h"
 #include "Setting.h"
 #include "Wire.h"
-//#include "Adafruit_FT6206.h"
 #include "Adafruit_STMPE610.h"
 
-//Adafruit_FT6206 ctp = Adafruit_FT6206();
 Adafruit_STMPE610 ctp = Adafruit_STMPE610(8);
 ILI9341_t3 tft = ILI9341_t3(TFT_CS, TFT_DC);
 SplashScreen splash = SplashScreen(FJ_X, FJ_Y, &tft, &ctp);
@@ -84,17 +82,6 @@ void loop(void) {
     settings();
   }
 }
-
-/*void loop(void) {
-  Serial.println("Temperature:");
-  //MAX6675 thermocouple(THERMOCOUPLE_SCLK, THERMOCOUPLE_CS, THERMOCOUPLE_MISO);
-  //Serial.println(thermocouple.getTemperature());
-  //delay(1000);
-
-  
-  Serial.println(thermocouple.readCelsius());
-  delay(1000);
-}*/
 
 
 void reflow(void){

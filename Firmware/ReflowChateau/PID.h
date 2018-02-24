@@ -6,7 +6,6 @@
 #define PID_h
 
 #include "Arduino.h"
-//#include "Max6675.h"
 #include "Adafruit_MAX31855.h"
 
 
